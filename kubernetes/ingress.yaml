@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: vertx-kubernetes-ingress
+spec:
+  rules:
+  - http:
+     paths:
+     - path: /simple
+       backend:
+         serviceName: vertx-kubernetes
+         servicePort: 8666

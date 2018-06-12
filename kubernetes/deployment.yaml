@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: vertx-kubernetes
+  labels:
+    app: vertx-kubernetes
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  minReadySeconds: 60
+  template:
+    metadata:
+      name: vertx-kubernetes
+      labels:
+        app: vertx-kubernetes
+        hazelcast: h1
+
+    spec:
+      containers:
+      - name: vertx-kubernetes
+
+        image: codepitbull/vertx-java-kubernetes:latest
+        imagePullPolicy: Never
+
+        ports:
+        - name: http
+          containerPort: 8666
+          protocol: TCP
+
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "500Mi"
+          requests:
+            cpu: "500m"
+            memory: "500Mi"
