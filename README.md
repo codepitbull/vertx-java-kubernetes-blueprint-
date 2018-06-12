@@ -18,14 +18,4 @@ kubectl expose deployment/vertx-kubernetes
 # Publish via Ingress
 kubectl create -f kubernetes/ingress.yaml
 
-# Update image
-kubectl set image deployment/vertx-backend vertx-backend=codepitbull/vertx-java-kubernetes-backend:4
-
-mvn clean install dockerfile:build
-
-kubectl delete pods <pod> --grace-period=0 --force
-
-kubectl exec -it shell-demo -- /bin/bash
-
-
 curl --insecure https://192.168.99.100/hello/world
